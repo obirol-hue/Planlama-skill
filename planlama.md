@@ -1,3 +1,8 @@
+---
+name: planlama
+description: Bir planlama raporu, veri özeti veya durum bilgisi al. Oku, analiz et ve somut öneriler sun.
+---
+
 Bir planlama raporu, veri özeti veya durum bilgisi al. Oku, analiz et ve somut öneriler sun.
 
 Platform bağlamı: ITA (İhale Platformu), SAP, EBYS, OIS, Depo/Lojistik, Power BI.
