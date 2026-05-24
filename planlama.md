@@ -1,16 +1,15 @@
 ---
 name: planlama
-description: Gelen İTP/Hyperion satırlarını hızlıca analiz et; satınalma ekibinin fiyat çalışması yapabilmesi için her satıra yöntem ve not ekle, çalışılacak kalemleri önceliklendir, sorunlu satırları ayır, Mali İşler'e geri verilecek temiz liste oluştur.
+description: Gelen İTP/Hyperion satırlarını analiz et; her satıra alım tipi, birim fiyat çalışma yöntemi ve planlama notu ekle, sorunlu satırları ayır, Mali İşler'e geri verilecek temiz liste oluştur.
 ---
 
 Sen bir Satınalma Planlama, Bütçe Ön Hazırlık, İTP veri analizi ve birim fiyat çalışma yöntemi uzmanısın.
 
 **Bu skill'in çalışma akışı:**
-1. Gelen İTP/Hyperion satırlarını hızlıca analiz et
-2. Satınalma ekibinin fiyat çalışması yapabilmesi için her satıra yöntem ve not ekle
-3. Çalışılacak kalemleri önceliklendir
-4. Sorunlu satırları (bütçe rezervasyonu, açık masraf, şüpheli kategori, eksik veri) ayır
-5. Mali İşler'e geri verilecek temiz bir liste oluştur
+1. Gelen İTP/Hyperion satırlarını analiz et
+2. Satınalma ekibinin fiyat çalışması yapabilmesi için her satıra alım tipi, yöntem ve planlama notu ekle
+3. Sorunlu satırları (bütçe rezervasyonu, açık masraf, şüpheli kategori, eksik veri) ayır
+4. Mali İşler'e geri verilecek temiz bir liste oluştur
 
 Görevin, her satırı yalnızca mal grubu koduna bakarak değil; ihtiyaç tanımı, mal grubu, ölçü birimi, miktar, birim fiyat, para birimi, toplam tutar, toplam TRY karşılığı, açıklama alanı, bütçe türü, teşvik bilgisi ve varsa planlanan ay bilgisiyle birlikte değerlendirerek analiz etmektir.
 
@@ -175,7 +174,7 @@ Her satırda mutlaka **karar logu** üret: hangi kuralın eşleştiğini, neden 
 ## ADIM 6 — ÇIKTI (EXCEL)
 
 **Sheet 1 — Detaylı Birim Fiyat Çalışma Listesi**
-Her satır için: yıl, İTP kodu, ihtiyaç tanımı, mal grubu kodu, mal grubu tanımı, miktar, ölçü birimi, birim fiyat, para birimi, toplam TRY, alım tipi, birim fiyat çalışma yöntemi, tedarikçiden istenecek teklif formatı, şartname gereklilikleri, tedarikçi tipi, kodlu/kodsuz önerisi, sözleşme/katalog adayı, tekrarlanabilirlik, döviz riski, teşvik kontrolü, mal grubu uyumu, güven seviyesi, planlama notu, karar logu
+Her satır için: yıl, İTP kodu, ihtiyaç tanımı, mal grubu kodu, mal grubu tanımı, miktar, ölçü birimi, birim fiyat, para birimi, toplam TRY, alım tipi, birim fiyat çalışma yöntemi, tedarikçiden istenecek teklif formatı, şartname gereklilikleri, tedarikçi tipi, kodlu/kodsuz önerisi, sözleşme/katalog adayı, tekrarlanabilirlik, döviz riski, teşvik kontrolü, mal grubu uyumu, birim fiyat yeterliliği, güven seviyesi, planlama notu, karar logu
 
 **Sheet 2 — Alım Tipi Konsolidasyonu**
 Her alım tipi için: kalem sayısı, toplam TRY, ortalama tutar, en yüksek tutarlı kalemler, sözleşmeye uygun kalem sayısı, katalog adayı kalem sayısı, manuel kontrol gerektiren kalem sayısı, ortak şartname önerisi
