@@ -171,25 +171,27 @@ Her satırda mutlaka **karar logu** üret: hangi kuralın eşleştiğini, neden 
 
 ---
 
-## ADIM 6 — ÇIKTI (EXCEL)
+## ADIM 6 — ÇIKTI
 
-**Sheet 1 — Detaylı Birim Fiyat Çalışma Listesi**
-Her satır için: yıl, İTP kodu, ihtiyaç tanımı, mal grubu kodu, mal grubu tanımı, miktar, ölçü birimi, birim fiyat, para birimi, toplam TRY, alım tipi, birim fiyat çalışma yöntemi, tedarikçiden istenecek teklif formatı, şartname gereklilikleri, tedarikçi tipi, kodlu/kodsuz önerisi, sözleşme/katalog adayı, tekrarlanabilirlik, döviz riski, teşvik kontrolü, mal grubu uyumu, birim fiyat yeterliliği, güven seviyesi, planlama notu, karar logu
+Çıktıları markdown tablo formatında üret. Kullanıcı "Excel'e aktar" veya "CSV ver" derse aynı veriyi CSV formatına dönüştür.
 
-**Sheet 2 — Alım Tipi Konsolidasyonu**
-Her alım tipi için: kalem sayısı, toplam TRY, ortalama tutar, en yüksek tutarlı kalemler, sözleşmeye uygun kalem sayısı, katalog adayı kalem sayısı, manuel kontrol gerektiren kalem sayısı, ortak şartname önerisi
+**Tablo 1 — Detaylı Birim Fiyat Çalışma Listesi**
+Her satır için: İTP kodu | ihtiyaç tanımı | mal grubu kodu | mal grubu tanımı | miktar | ölçü birimi | birim fiyat | para birimi | toplam TRY | alım tipi | birim fiyat çalışma yöntemi | tedarikçiden istenecek | şartname gereklilikleri | kodlu/kodsuz | sözleşme/katalog adayı | tekrarlanabilirlik | döviz riski | teşvik kontrolü | mal grubu uyumu | birim fiyat yeterliliği | güven seviyesi | planlama notu | karar logu
 
-**Sheet 3 — Şüpheli Kategori Listesi**
-Mal grubu ile tanımı uyuşmayanlar, teşvik altında şüpheli kalemler, tamir bakım altında cihaz alımları, hizmet altında demirbaşlar, sarf altında yazılım/lisanslar, yanlış yönlenmiş açık masraflar
+**Tablo 2 — Alım Tipi Özeti**
+Her alım tipi için: kalem sayısı | toplam TRY | ortalama tutar | sözleşme uygun | katalog adayı | manuel kontrol | ortak şartname önerisi
 
-**Sheet 4 — Sözleşme / Katalog Adayları**
-Yıllık tekrar eden hizmetler, aylık sabit hizmetler, sarf katalogları, lab sarf çerçeveleri, cihaz bakım anlaşmaları, lisans/abonelik yenilemeleri, toner/kırtasiye/temizlik/mutfak sarfları
+**Tablo 3 — Şüpheli Kategori Listesi**
+Mal grubu ile tanımı uyuşmayanlar, teşvik altında şüpheli kalemler, tamir bakım altında cihaz alımları, hizmet altında demirbaşlar, sarf altında yazılım/lisanslar
 
-**Sheet 5 — Döviz ve Teşvik Riski**
-EUR/USD kalemler, 500.000 TRY üzeri dövizli kalemler, teşvik kapsamlı kalemler, ithalat riski olan cihazlar, uzun teslim süreli kalemler
+**Tablo 4 — Sözleşme / Katalog Adayları**
+Yıllık tekrar eden hizmetler, aylık sabit hizmetler, sarf katalogları, lab sarf çerçeveleri, cihaz bakım anlaşmaları, lisans/abonelik yenilemeleri
 
-**Sheet 6 — Bütçe Rezervasyonu ve Açık Masraf**
-1 TL/sembolik kayıtlar ve kazı, denklik, noter, postdoc, araştırma masrafı, focus group, avans, mahsup türü satınalma dışı kayıtlar
+**Tablo 5 — Döviz ve Teşvik Riski**
+EUR/USD kalemler | 500.000 TRY üzeri dövizli | teşvik kapsamlı | ithalat riski | uzun teslim süreli
+
+**Tablo 6 — Bütçe Rezervasyonu ve Açık Masraf**
+Sembolik/1 TL kayıtlar ve kazı, denklik, noter, postdoc, araştırma masrafı, focus group, avans, mahsup türü kayıtlar
 
 ---
 
@@ -226,8 +228,11 @@ Sonuç bakışı: Bu analiz, İTP kalemlerinin yalnızca bütçe satırı olarak
 
 # MODÜL 2 — KONSOLİDASYON VE SATINALMA PAKETLEME ANALİZİ
 
-Bu modül yalnızca kullanıcı şu niyetlerden biriyle geldiğinde çalışır:
-"konsolidasyon analizi", "hangi kalemler birleşir", "tek ihaleye uygun grupları bul", "toplu alım fırsatları", "çerçeve sözleşme adayları", "paketleme öner", "ölçek ekonomisi fırsatları"
+Bu modül yalnızca $ARGUMENTS içinde aşağıdaki ifadelerden biri geçiyorsa çalışır. Aksi hâlde sadece Modül 1 uygulanır.
+
+Tetikleyici ifadeler: konsolidasyon | hangi kalemler birleşir | tek ihale | toplu alım | çerçeve sözleşme | paketleme | ölçek ekonomisi
+
+Tetikleyici ifade yoksa bu modülü tamamen atla ve Modül 1 çıktısını ver.
 
 **Temel değer:** Satınalmacının elle fark etmek zorunda kaldığı dağınık ihtiyaçları otomatik yakalar. Sadece "birleştir" demez; neden, nasıl, hangi risk, tek ihale mi alt paket mi sorularına da yanıt verir.
 
@@ -252,16 +257,16 @@ Bu modül yalnızca kullanıcı şu niyetlerden biriyle geldiğinde çalışır:
 ### SİNYAL A — DİKEY KONSOLİDASYON
 Tek mal grubu kodu altında çok sayıda kalem, çok sayıda birime dağılmışsa → yıllık çerçeve veya toplu alım adayı
 
-Hesapla: kalem_sayısı, birim_sayısı, toplam_TRY, cap_var_mı (en yüksek kalem bütçenin %70'inden fazlasını taşıyor mu?)
-Eşik: kalem_sayısı ≥ 10 VE birim_sayısı ≥ 3
+Hesapla: kalem_sayısı, birim_sayısı, toplam_TRY (milyon cinsinden, örn. 152.000 TL → 0.152), cap_var_mı (en yüksek kalem bütçenin %70'inden fazlasını taşıyor mu?)
+Eşik: kalem_sayısı ≥ 5 VE birim_sayısı ≥ 2 (büyük set: ≥500 satır için kalem_sayısı ≥ 10, birim_sayısı ≥ 3)
 Ham skor: √(kalem_sayısı × birim_sayısı × milyon_TRY)
 
 ### SİNYAL B — ÇAPRAZ KONSOLİDASYON
 Mal grubu kodunun alfabetik ön eki aynı aileyi temsil ediyorsa → tek tedarikçi veya hizmet çerçevesinde birleşebilir
 
 Aile çıkarma: "LABS01" → "LABS" | "BKMH06" → "BKMH" | "8000" kendi içinde tutulur
-Hesapla: kalem_sayısı, farklı_MG, toplam_TRY
-Eşik: kalem_sayısı ≥ 5 VE farklı_MG ≥ 2
+Hesapla: kalem_sayısı, farklı_MG, toplam_TRY (milyon cinsinden)
+Eşik: kalem_sayısı ≥ 3 VE farklı_MG ≥ 2
 Ham skor: √(kalem_sayısı × farklı_MG × milyon_TRY) × 1.3
 
 ### SİNYAL C — YATAY KONSOLİDASYON
@@ -291,8 +296,8 @@ Anahtar küme eşleşmeleri (regex):
 | Pil | pil aa\|aa pil\|aaa pil |
 | Akademik yayın | yayın desteği\|makale\|apc |
 
-Hesapla: kalem_sayısı, farklı_MG, farklı_birim, toplam_TRY, yanlış_sınıf_oranı = farklı_MG / kalem_sayısı
-Eşik: kalem_sayısı ≥ 3 VE (farklı_MG ≥ 3 VEYA farklı_birim ≥ 5)
+Hesapla: kalem_sayısı, farklı_MG, farklı_birim, toplam_TRY (milyon cinsinden), yanlış_sınıf_oranı = farklı_MG / kalem_sayısı
+Eşik: kalem_sayısı ≥ 2 VE (farklı_MG ≥ 2 VEYA farklı_birim ≥ 3)
 Ham skor: √(kalem_sayısı × farklı_MG × farklı_birim × milyon_TRY)
 
 ---
